@@ -1,0 +1,9 @@
+{
+  "productos": [
+    {
+      "nombre": "pollo",
+      "precio": "8001",
+      "id": 1
+    }
+  ]
+}

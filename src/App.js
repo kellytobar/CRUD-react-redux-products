@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import store from './store';
+import { Provider } from 'react-redux';
+
+import Products from './components/Products';
+
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import NotFound from "./components/NotFound";
+import NewProduct from "./components/NewProduct";
+import Navbar from './components/Navbar';
+
+import EditProduct from "./components/EditProduct";
+
+class App extends React.Component {
+  
+  render() {
+    return (
+      <Provider store={store}>
+        <BrowserRouter>
+          <div>
+            <Navbar/>
+            <Switch>
+              <Route exact path="/" component={Products} />
+              <Route exact path="/productos/nuevo" component={NewProduct} />
+              <Route path="/productos/edit/:id" render={(props)=>{ 
+                return <EditProduct id={props.match.params.id}></EditProduct>
+              }}>
+              </Route>
+              <Route component={NotFound} />
+            </Switch>
+          </div>
+        </BrowserRouter>
+          {/* <Productos /> */}
+        
+      </Provider>
+    );
+  } 
 }
 
 export default App;
